@@ -8,4 +8,5 @@ __pycache__/
 
 # Local notes and temp files
 tmp/
+dist/
 *.log
