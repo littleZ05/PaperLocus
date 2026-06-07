@@ -1,12 +1,27 @@
-# PaperLocus
+<h1 align="center">PaperLocus</h1>
 
-> Locate every paper in the literature, not just in a summary.
+<p align="center">
+  <strong>Locate every paper in the literature, not just in a summary.</strong>
+</p>
 
-PaperLocus is a Codex skill for reference-aware paper reading. It classifies
-research papers by narrative logic, places them in the literature, and turns
-them into reusable Markdown notes.
+<p align="center">
+  Reference-aware paper reading for Codex. PaperLocus classifies papers by narrative logic, places them in the literature, and turns them into reusable Markdown notes.
+</p>
 
-## What It Does
+<p align="center">
+  <a href="./LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-24292f"></a>
+  <img alt="Codex Skill" src="https://img.shields.io/badge/Codex-skill-2563eb">
+  <img alt="Narrative Logic" src="https://img.shields.io/badge/narrative-logic-d97706">
+  <img alt="Output" src="https://img.shields.io/badge/output-Markdown%20notes-16a34a">
+  <img alt="Focus" src="https://img.shields.io/badge/focus-literature%20positioning-7c3aed">
+</p>
+
+<p align="center">
+  <strong>Compass points:</strong>
+  🧭 position · 🔎 compare · 🧩 classify · 📝 note · 🛡️ verify
+</p>
+
+## 🎯 What It Does
 
 PaperLocus is designed for the questions researchers ask after the abstract:
 
@@ -22,7 +37,7 @@ It is especially useful when moving between:
 - `Nature / Science / Nature-*` papers
 - science-venue papers whose actual narrative is still method-led
 
-## Quick Start
+## 🚀 Quick Start
 
 ### 1. Install The Skill
 
@@ -91,7 +106,36 @@ Extract the title, abstract, section headings, and conclusion first.
 Then classify the paper type and list which sections should be read next.
 ```
 
-## Reading Pipeline
+## 🧠 Mental Model
+
+```mermaid
+mindmap
+  root((PaperLocus))
+    🧩 Classify
+      Method paper
+      Evidence-chain paper
+      Hybrid venue
+    🧭 Position
+      Core prior work
+      Main baselines
+      Research path
+    🔎 Read
+      Introduction arc
+      Method frame
+      Experiment intent
+      Evidence strength
+    📝 Output
+      Markdown note
+      Literature node
+      Reusable context
+    🛡️ Guardrails
+      Paper claims
+      Evidence
+      Inference
+      Open questions
+```
+
+## 🧭 Reading Pipeline
 
 ```mermaid
 flowchart LR
@@ -104,7 +148,7 @@ flowchart LR
     F --> G[Reusable Markdown note]
 ```
 
-## Supported Inputs
+## 📥 Supported Inputs
 
 | Input | Behavior |
 | --- | --- |
@@ -113,7 +157,7 @@ flowchart LR
 | Screenshot | Treat as partial evidence and avoid whole-paper claims |
 | Title only | Recover abstract-level context if possible; otherwise produce a scoped triage note |
 
-## Classification Logic
+## 🧩 Classification Logic
 
 PaperLocus follows narrative logic instead of venue heuristics.
 
@@ -128,7 +172,7 @@ is organized around observations or experiments supporting a central conclusion.
 If the venue suggests one branch but the narrative suggests another, PaperLocus
 follows the narrative and explicitly notes the conflict.
 
-## Output Style
+## 📝 Output Style
 
 The default output is a compact whole-paper note with sections such as:
 
@@ -147,7 +191,7 @@ See [examples/sample-output.md](examples/sample-output.md) for a smoke-test
 output and [examples/sample-prompts.md](examples/sample-prompts.md) for more
 prompt patterns.
 
-## Practical Notes
+## 🛠️ Practical Notes
 
 - The skill itself is Markdown-only, but PDF reading works best when your Codex
   environment has `pypdf` or `pdfplumber` available.
@@ -157,7 +201,7 @@ prompt patterns.
   noise rather than a failed PaperLocus run.
 - Start small, verify the skill is visible, then move to deep PDF reading.
 
-## Repository Layout
+## 📂 Repository Layout
 
 ```text
 paperlocus/
@@ -173,12 +217,12 @@ paperlocus/
       paper_type_examples.md
 ```
 
-## Release Copy
+## 🚢 Release Copy
 
 - Repository description: `Reference-aware paper reading for Codex that classifies research papers by narrative logic, positions them in the literature, and turns them into reusable Markdown notes.`
 - Tagline: `Locate every paper in the literature, not just in a summary.`
 - First release: `v0.1.0 - Initial public release`
 
-## License
+## 📄 License
 
 Released under the [MIT License](./LICENSE).
