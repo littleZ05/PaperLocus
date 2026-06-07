@@ -10,9 +10,15 @@
 
 <p align="center">
   <a href="./LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-24292f"></a>
-  <img alt="Codex Skill" src="https://img.shields.io/badge/Codex-skill-0969da">
-  <img alt="Output" src="https://img.shields.io/badge/output-Markdown%20notes-1a7f37">
-  <img alt="Focus" src="https://img.shields.io/badge/focus-literature%20positioning-8250df">
+  <img alt="Codex Skill" src="https://img.shields.io/badge/Codex-skill-2563eb">
+  <img alt="Narrative Logic" src="https://img.shields.io/badge/narrative-logic-d97706">
+  <img alt="Output" src="https://img.shields.io/badge/output-Markdown%20notes-16a34a">
+  <img alt="Focus" src="https://img.shields.io/badge/focus-literature%20positioning-7c3aed">
+</p>
+
+<p align="center">
+  <strong>Compass points:</strong>
+  🧭 position · 🔎 compare · 🧩 classify · 📝 note · 🛡️ verify
 </p>
 
 ## What It Does
@@ -51,24 +57,24 @@ PaperLocus is built for the questions that matter once you are actually doing re
 ```mermaid
 mindmap
   root((PaperLocus))
-    Classify
+    🧩 Classify
       Method paper
       Evidence-chain paper
       Hybrid venue
-    Position
+    🧭 Position
       Core prior work
       Main baselines
       Research path
-    Read
+    🔎 Read
       Introduction arc
       Method frame
       Experiment intent
       Evidence strength
-    Output
+    📝 Output
       Markdown note
       Literature node
       Reusable context
-    Guardrails
+    🛡️ Guardrails
       Paper claims
       Evidence
       Inference
@@ -87,10 +93,10 @@ flowchart LR
     E --> F
     F --> G[Reusable Markdown note]
 
-    classDef input fill:#f6f8fa,stroke:#57606a,color:#24292f;
-    classDef decision fill:#fff8c5,stroke:#9a6700,color:#24292f;
-    classDef work fill:#ddf4ff,stroke:#0969da,color:#24292f;
-    classDef output fill:#dafbe1,stroke:#1a7f37,color:#24292f;
+    classDef input fill:#eef6ff,stroke:#2563eb,color:#1f2937;
+    classDef decision fill:#fff7ed,stroke:#d97706,color:#1f2937;
+    classDef work fill:#f5f3ff,stroke:#7c3aed,color:#1f2937;
+    classDef output fill:#ecfdf5,stroke:#16a34a,color:#1f2937;
     class A,B input;
     class C decision;
     class D,E,F work;
@@ -99,12 +105,12 @@ flowchart LR
 
 ## At A Glance
 
-| Capability | What it means |
-| --- | --- |
-| Narrative-aware classification | Classifies papers by structure and argument, not venue alone |
-| Reference-aware reading | Prioritizes introduction-critical papers and dominant baselines |
-| Reusable Markdown notes | Produces durable notes for Obsidian, RAG, and long-running literature workflows |
-| Research hallucination control | Separates paper claims, evidence, inference, and open questions |
+|  | Capability | What it means |
+| --- | --- | --- |
+| 🧩 | Narrative-aware classification | Classifies papers by structure and argument, not venue alone |
+| 🔎 | Reference-aware reading | Prioritizes introduction-critical papers and dominant baselines |
+| 📝 | Reusable Markdown notes | Produces durable notes for Obsidian, RAG, and long-running literature workflows |
+| 🛡️ | Research hallucination control | Separates paper claims, evidence, inference, and open questions |
 
 ## Supported Inputs
 
@@ -120,12 +126,12 @@ PaperLocus is designed to work with:
 
 Input handling is intentionally different by source:
 
-| Input | Behavior |
-| --- | --- |
-| PDF or local file | Extract title, abstract, section headers, introduction, method, experiments, and conclusion first |
-| arXiv, DOI, or webpage | Recover metadata and primary paper text or abstract before summarizing |
-| Screenshot | Treat as partial evidence and avoid whole-paper claims |
-| Title only | Recover abstract-level context first, then downgrade to triage if full text is unavailable |
+|  | Input | Behavior |
+| --- | --- | --- |
+| 📄 | PDF or local file | Extract title, abstract, section headers, introduction, method, experiments, and conclusion first |
+| 🔗 | arXiv, DOI, or webpage | Recover metadata and primary paper text or abstract before summarizing |
+| 🖼️ | Screenshot | Treat as partial evidence and avoid whole-paper claims |
+| 🏷️ | Title only | Recover abstract-level context first, then downgrade to triage if full text is unavailable |
 
 ## Classification Logic
 
@@ -153,11 +159,11 @@ If the venue suggests one branch but the narrative suggests another, PaperLocus 
 
 The current version has been stress-tested on three groups:
 
-| Group | Examples | Expected behavior |
-| --- | --- | --- |
-| Science venue, method-led | `scBERT`, `scGPT`, `Geneformer`, `scLong` | Treat as method-led papers |
-| Classical evidence-chain papers | `A kilonova as the electromagnetic counterpart to a gravitational-wave source`, `A formal test of the theory of universal common ancestry` | Treat as science evidence-chain papers |
-| arXiv and embodied-AI papers | `DiT`, `Unified World Models`, `Motus`, `LDA-1B`, `DINOv3` | Treat as method papers and emphasize literature positioning |
+|  | Group | Examples | Expected behavior |
+| --- | --- | --- | --- |
+| 🧪 | Science venue, method-led | `scBERT`, `scGPT`, `Geneformer`, `scLong` | Treat as method-led papers |
+| 🔭 | Classical evidence-chain papers | `A kilonova as the electromagnetic counterpart to a gravitational-wave source`, `A formal test of the theory of universal common ancestry` | Treat as science evidence-chain papers |
+| 🤖 | arXiv and embodied-AI papers | `DiT`, `Unified World Models`, `Motus`, `LDA-1B`, `DINOv3` | Treat as method papers and emphasize literature positioning |
 
 ## Installation
 
