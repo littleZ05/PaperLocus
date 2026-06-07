@@ -1,4 +1,20 @@
-# PaperLocus
+<p align="center">
+  <img src="./assets/paperlocus-banner.svg" alt="PaperLocus banner" width="100%" />
+</p>
+
+<p align="center">
+  <strong>Reference-aware paper reading for Codex.</strong><br />
+  Classify papers by narrative logic, place them in the literature, and turn them into reusable Markdown notes.
+</p>
+
+<p align="center">
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111.svg" alt="MIT License" /></a>
+  <img src="https://img.shields.io/badge/status-active-1f6feb.svg" alt="Status: Active" />
+  <img src="https://img.shields.io/badge/output-Markdown%20notes-2ea44f.svg" alt="Output: Markdown notes" />
+  <img src="https://img.shields.io/badge/focus-literature%20positioning-bf3989.svg" alt="Focus: literature positioning" />
+</p>
+
+## What It Is
 
 `PaperLocus` is a Codex skill for reading research papers the way researchers actually use them:
 
@@ -13,86 +29,46 @@ It is designed for users who switch between:
 - `Nature / Science / Nature-*` papers
 - hybrid papers that look like method papers even when they are published in science venues
 
-## Why PaperLocus
+## Why It Exists
 
 Most paper-reading tools stop at surface summarization:
 
-- "what is the paper about"
-- "what method does it use"
-- "what are the results"
+- what is the paper about
+- what method does it use
+- what are the results
 
-That is useful, but it often misses the part that matters most for actual research work:
+What often matters more in actual research work is:
 
-- what research path this paper belongs to
+- what line of work this paper belongs to
 - which prior work it inherits from
 - what exactly it changes
 - which baseline or reference paper it is really arguing with
 - whether it should be read as a method paper or as a scientific evidence-chain paper
 
-`PaperLocus` is built to answer those questions directly.
+`PaperLocus` is built for those questions.
 
-## Core Selling Points
+## At A Glance
 
-### 1. Narrative-aware paper classification
+| Capability | What it means |
+| --- | --- |
+| Narrative-aware classification | Distinguishes `method papers` from `science evidence-chain papers` by structure, not venue alone |
+| Reference-aware understanding | Reads a paper together with its core prior works and dominant baselines |
+| Reusable Markdown output | Produces notes that fit Obsidian, RAG, and long-running literature workflows |
+| Better research hallucination control | Tries to prevent factual fabrication, bad field positioning, and misleading compression |
 
-PaperLocus does not classify papers by venue alone.
-
-It distinguishes between:
-
-- `computer-science / arXiv / ccf-a style` papers
-- `Nature / Science evidence-chain style` papers
-- mixed cases where the venue is scientific but the narrative is still method-led
-
-That means papers like `scGPT` or `Geneformer` can still be read as method papers when that is the right interpretation.
-
-### 2. Reference-aware understanding
-
-PaperLocus is designed to read a paper with the comparison frame a human researcher would naturally bring:
-
-- the core prior works criticized in the introduction
-- the dominant baselines in the result tables
-- the narrow subfield the user is actually working in
-
-Instead of flattening everything into a generic summary, it asks:
-
-- built on what
-- changed what
-- therefore obtained what
-
-### 3. Reusable Markdown notes
-
-The output is designed to become a durable research note, not a one-off chat response.
-
-It works especially well for workflows where you want:
-
-- an Obsidian-style literature graph
-- note nodes that can later be indexed by RAG
-- compact but high-signal reading notes for group meetings and paper discussions
-
-### 4. Better hallucination control for research reading
-
-PaperLocus treats hallucination broadly.
-
-It tries to prevent:
-
-- fabricated facts
-- incorrect benchmark or dataset details
-- distorted positioning against the field
-- summaries that erase the comparison points needed for real understanding
-
-## How It Thinks
+## The Core Idea
 
 ```mermaid
 flowchart TD
-    A[Input Paper] --> B[Recover Core Content]
-    B --> C[Classify Narrative Type]
-    C --> D1[Method Paper Branch]
-    C --> D2[Science Evidence-Chain Branch]
-    D1 --> E[Extract Core Prior Works]
-    D1 --> F[Extract Baselines and Main Claims]
-    D2 --> G[Extract Scientific Question]
-    D2 --> H[Reconstruct Evidence Chain]
-    E --> I[Reusable Markdown Note]
+    A[Input paper] --> B[Recover core content]
+    B --> C[Classify narrative type]
+    C --> D1[Method paper branch]
+    C --> D2[Science evidence-chain branch]
+    D1 --> E[Extract core prior works]
+    D1 --> F[Extract baselines and main claims]
+    D2 --> G[Extract scientific question]
+    D2 --> H[Reconstruct evidence chain]
+    E --> I[Reusable Markdown note]
     F --> I
     G --> I
     H --> I
@@ -102,7 +78,7 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-    A[Raw PDF or Link] --> B[Surface Summary Tool]
+    A[Raw PDF or link] --> B[Surface summary]
     A --> C[PaperLocus]
     B --> D[Single-paper recap]
     C --> E[Paper position in the literature]
@@ -124,10 +100,8 @@ PaperLocus is designed to work with:
 
 It does not treat these inputs equally.
 
-The workflow changes depending on input type:
-
 - `PDF / local file`
-  - extract title, abstract, section headers, introduction, method, experiments, conclusion
+  - extract title, abstract, section headers, introduction, method, experiments, and conclusion
   - skip acknowledgments, checklists, and boilerplate by default
 - `arXiv / DOI / webpage`
   - recover metadata and paper text or abstract first
@@ -161,9 +135,9 @@ PaperLocus uses narrative logic instead of venue heuristics.
 
 If the venue suggests one branch but the narrative suggests another, PaperLocus follows the narrative and explicitly notes the conflict.
 
-## Validation Examples
+## Validation
 
-The current version has been manually stress-tested on:
+The current version has been manually stress-tested on three useful groups:
 
 ### Science-venue but method-led papers
 
@@ -199,41 +173,18 @@ Expected behavior:
 - classify them as method papers
 - emphasize prior-work positioning and baseline structure
 
-## Repository Layout
-
-```text
-paperlocus/
-  README.md
-  examples/
-    sample-prompts.md
-    sample-output.md
-  paperlocus/
-    SKILL.md
-    agents/
-      openai.yaml
-    references/
-      paper_type_examples.md
-```
-
-## Naming
-
-The project name `PaperLocus` emphasizes the core idea that this skill is not only about reading a paper, but about locating it in the literature:
-
-- what line of work it belongs to
-- what prior papers it builds on
-- what it changes
-- and where it sits in the research landscape
-
 ## Installation
 
-Copy the skill folder into your Codex skills directory:
+Copy the skill folder into your Codex skills directory.
+
+### macOS / Linux
 
 ```bash
 mkdir -p ~/.codex/skills
 cp -r paperlocus ~/.codex/skills/
 ```
 
-On Windows PowerShell:
+### Windows PowerShell
 
 ```powershell
 New-Item -ItemType Directory -Force $HOME\.codex\skills | Out-Null
@@ -283,9 +234,25 @@ The default output is a compact whole-paper note with sections such as:
 
 A compact sample output is available in [examples/sample-output.md](examples/sample-output.md).
 
-## Best Use Cases
+## Repository Layout
 
-PaperLocus is especially useful for:
+```text
+paperlocus/
+  README.md
+  assets/
+    paperlocus-banner.svg
+  examples/
+    sample-prompts.md
+    sample-output.md
+  paperlocus/
+    SKILL.md
+    agents/
+      openai.yaml
+    references/
+      paper_type_examples.md
+```
+
+## Best Use Cases
 
 - weekly paper reading
 - group meeting preparation
@@ -309,3 +276,7 @@ This is an actively iterated research-reading skill. The current emphasis is on:
 - better hybrid paper classification
 - cleaner reference-aware notes
 - stronger support for literature-graph workflows
+
+## License
+
+Released under the [MIT License](./LICENSE).

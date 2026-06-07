@@ -1,0 +1,63 @@
+<svg width="1600" height="520" viewBox="0 0 1600 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1220"/>
+      <stop offset="0.5" stop-color="#111B2E"/>
+      <stop offset="1" stop-color="#132238"/>
+    </linearGradient>
+    <linearGradient id="accent1" x1="208" y1="90" x2="1400" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#57C7FF"/>
+      <stop offset="0.55" stop-color="#7A7CFF"/>
+      <stop offset="1" stop-color="#40E0B0"/>
+    </linearGradient>
+    <linearGradient id="accent2" x1="320" y1="420" x2="1360" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#20324D"/>
+      <stop offset="1" stop-color="#2C4668"/>
+    </linearGradient>
+    <filter id="blur" x="0" y="0" width="1600" height="520" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="50"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="520" rx="28" fill="url(#bg)"/>
+
+  <g opacity="0.45" filter="url(#blur)">
+    <circle cx="1240" cy="90" r="130" fill="#5ED3FF"/>
+    <circle cx="1420" cy="360" r="120" fill="#635BFF"/>
+    <circle cx="260" cy="430" r="110" fill="#2CD4A7"/>
+  </g>
+
+  <g opacity="0.9">
+    <path d="M985 120C1130 130 1255 175 1360 255" stroke="url(#accent1)" stroke-width="4"/>
+    <path d="M990 175C1110 188 1210 225 1298 292" stroke="url(#accent1)" stroke-width="4" opacity="0.7"/>
+    <path d="M988 230C1088 242 1170 274 1244 330" stroke="url(#accent1)" stroke-width="4" opacity="0.45"/>
+    <circle cx="980" cy="118" r="10" fill="#57C7FF"/>
+    <circle cx="1128" cy="137" r="9" fill="#7A7CFF"/>
+    <circle cx="1244" cy="186" r="9" fill="#40E0B0"/>
+    <circle cx="1360" cy="255" r="11" fill="#57C7FF"/>
+    <circle cx="1102" cy="240" r="8" fill="#40E0B0"/>
+    <circle cx="1245" cy="330" r="10" fill="#7A7CFF"/>
+  </g>
+
+  <g opacity="0.95">
+    <rect x="960" y="86" width="366" height="290" rx="26" fill="url(#accent2)" stroke="#35527C"/>
+    <rect x="995" y="118" width="180" height="14" rx="7" fill="#5DD3FF" opacity="0.9"/>
+    <rect x="995" y="152" width="252" height="10" rx="5" fill="#8AA4C8" opacity="0.7"/>
+    <rect x="995" y="176" width="220" height="10" rx="5" fill="#8AA4C8" opacity="0.55"/>
+    <rect x="995" y="224" width="120" height="12" rx="6" fill="#7A7CFF"/>
+    <rect x="1140" y="224" width="90" height="12" rx="6" fill="#40E0B0"/>
+    <rect x="995" y="260" width="286" height="12" rx="6" fill="#D7E3F7" opacity="0.9"/>
+    <rect x="995" y="286" width="246" height="12" rx="6" fill="#D7E3F7" opacity="0.65"/>
+    <rect x="995" y="326" width="150" height="14" rx="7" fill="#57C7FF"/>
+    <rect x="1165" y="326" width="116" height="14" rx="7" fill="#6D8AB3"/>
+  </g>
+
+  <g>
+    <text x="120" y="170" fill="#F7FAFF" font-family="Segoe UI, Arial, sans-serif" font-size="76" font-weight="700">PaperLocus</text>
+    <text x="120" y="225" fill="#8FB2D9" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="500">Reference-aware paper reading for Codex</text>
+    <text x="120" y="290" fill="#D7E3F7" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="400">
+      <tspan x="120" dy="0">Classify papers by narrative logic, place them in the literature,</tspan>
+      <tspan x="120" dy="40">and turn them into reusable Markdown notes.</tspan>
+    </text>
+  </g>
+</svg>
