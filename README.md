@@ -1,87 +1,97 @@
-<h1 align="center">PaperLocus</h1>
+# PaperLocus
 
-<p align="center">
-  <strong>Locate every paper in the literature, not just in a summary.</strong>
-</p>
+> Locate every paper in the literature, not just in a summary.
 
-<p align="center">
-  Reference-aware paper reading for Codex. PaperLocus classifies papers by narrative logic, places them in the literature, and turns them into reusable Markdown notes.
-</p>
+PaperLocus is a Codex skill for reference-aware paper reading. It classifies
+research papers by narrative logic, places them in the literature, and turns
+them into reusable Markdown notes.
 
-<p align="center">
-  <a href="./LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-24292f"></a>
-  <img alt="Codex Skill" src="https://img.shields.io/badge/Codex-skill-2563eb">
-  <img alt="Narrative Logic" src="https://img.shields.io/badge/narrative-logic-d97706">
-  <img alt="Output" src="https://img.shields.io/badge/output-Markdown%20notes-16a34a">
-  <img alt="Focus" src="https://img.shields.io/badge/focus-literature%20positioning-7c3aed">
-</p>
+## What It Does
 
-<p align="center">
-  <strong>Compass points:</strong>
-  🧭 position · 🔎 compare · 🧩 classify · 📝 note · 🛡️ verify
-</p>
+PaperLocus is designed for the questions researchers ask after the abstract:
 
-## 🎯 What It Does
+- What line of work does this paper belong to?
+- Which prior works or baselines is it really arguing with?
+- Is this a method paper, an evidence-chain science paper, or a mixed case?
+- What should I remember as a reusable literature note?
+- Which claims are supported by the paper, and which parts are inference?
 
-`PaperLocus` is a Codex skill for reading research papers the way researchers actually use them:
-
-- locate a paper in the literature
-- compare it against core prior works and baselines
-- classify whether it is a method paper or an evidence-chain science paper
-- produce reusable Markdown notes for later retrieval, review, and discussion
-
-It is especially useful when you move between:
+It is especially useful when moving between:
 
 - `ccf-a / arXiv` method papers
 - `Nature / Science / Nature-*` papers
-- hybrid science-venue papers whose actual narrative is still method-led
+- science-venue papers whose actual narrative is still method-led
 
-## ❓ Why It Exists
+## Quick Start
 
-Most paper-reading tools answer surface questions:
+### 1. Install The Skill
 
-- what is the paper about
-- what method does it use
-- what are the results
+Copy the skill folder into your Codex skills directory.
 
-PaperLocus is built for the questions that matter once you are actually doing research:
-
-- what line of work does this paper belong to
-- which prior work does it inherit from
-- what exactly did it change
-- which baseline or reference paper is it really arguing with
-- where does this paper sit in the research landscape
-
-## 🧠 Mental Model
-
-```mermaid
-mindmap
-  root((PaperLocus))
-    🧩 Classify
-      Method paper
-      Evidence-chain paper
-      Hybrid venue
-    🧭 Position
-      Core prior work
-      Main baselines
-      Research path
-    🔎 Read
-      Introduction arc
-      Method frame
-      Experiment intent
-      Evidence strength
-    📝 Output
-      Markdown note
-      Literature node
-      Reusable context
-    🛡️ Guardrails
-      Paper claims
-      Evidence
-      Inference
-      Open questions
+```bash
+mkdir -p ~/.codex/skills
+cp -R paperlocus ~/.codex/skills/
 ```
 
-## 🧭 Reading Pipeline
+On Windows PowerShell:
+
+```powershell
+New-Item -ItemType Directory -Force $HOME\.codex\skills | Out-Null
+Copy-Item -Recurse -Force .\paperlocus $HOME\.codex\skills\
+```
+
+After installation, start a new Codex session or run `codex exec` with a prompt
+that explicitly mentions `$paperlocus`.
+
+### 2. Run A Small Smoke Test First
+
+Before trying a long PDF, verify that Codex can see the skill and can write a
+note. A title-only or abstract-only test is the fastest path.
+
+Interactive prompt:
+
+```text
+Use $paperlocus to read the title-only paper request: Attention Is All You Need.
+Do not browse. Create a concise Chinese reusable Markdown note.
+Clearly mark the note as title-only and separate paper claims, inference, and uncertainty.
+```
+
+CLI smoke test:
+
+```bash
+codex exec -c 'model_reasoning_effort="low"' --skip-git-repo-check 'Use $paperlocus to read the title-only paper request: Attention Is All You Need. Do not browse. Create a concise Chinese reusable Markdown note as trial-note.md. Clearly mark the note as title-only and separate paper claims, inference, and uncertainty.'
+```
+
+On Windows, use `codex.cmd` instead of `codex`:
+
+```powershell
+codex.cmd exec -c 'model_reasoning_effort="low"' --skip-git-repo-check 'Use $paperlocus to read the title-only paper request: Attention Is All You Need. Do not browse. Create a concise Chinese reusable Markdown note as trial-note.md. Clearly mark the note as title-only and separate paper claims, inference, and uncertainty.'
+```
+
+Why `low` for the first test? In a real first-time trial, high reasoning effort
+was overkill for smoke testing and could make the command feel stuck. Use low
+reasoning to test installation; use higher reasoning for actual deep reading.
+
+### 3. Read A Paper
+
+Once the smoke test works, give PaperLocus a PDF, arXiv link, DOI, webpage, or
+paper title.
+
+```text
+Use $paperlocus to read ./paper.pdf and produce a structured Chinese Markdown note.
+First recover the title, abstract, section headings, introduction, method, experiments, and conclusion.
+If any section is unavailable or extraction is noisy, say so explicitly before making strong claims.
+```
+
+For long PDFs, a staged prompt is often better:
+
+```text
+Use $paperlocus to make an initial triage note for ./paper.pdf.
+Extract the title, abstract, section headings, and conclusion first.
+Then classify the paper type and list which sections should be read next.
+```
+
+## Reading Pipeline
 
 ```mermaid
 flowchart LR
@@ -92,120 +102,33 @@ flowchart LR
     D --> F[Position in literature]
     E --> F
     F --> G[Reusable Markdown note]
-
-    classDef input fill:#eef6ff,stroke:#2563eb,color:#1f2937;
-    classDef decision fill:#fff7ed,stroke:#d97706,color:#1f2937;
-    classDef work fill:#f5f3ff,stroke:#7c3aed,color:#1f2937;
-    classDef output fill:#ecfdf5,stroke:#16a34a,color:#1f2937;
-    class A,B input;
-    class C decision;
-    class D,E,F work;
-    class G output;
 ```
 
-## ✨ At A Glance
+## Supported Inputs
 
-|  | Capability | What it means |
-| --- | --- | --- |
-| 🧩 | Narrative-aware classification | Classifies papers by structure and argument, not venue alone |
-| 🔎 | Reference-aware reading | Prioritizes introduction-critical papers and dominant baselines |
-| 📝 | Reusable Markdown notes | Produces durable notes for Obsidian, RAG, and long-running literature workflows |
-| 🛡️ | Research hallucination control | Separates paper claims, evidence, inference, and open questions |
+| Input | Behavior |
+| --- | --- |
+| PDF or local file | Extract title, abstract, section headers, introduction, method, experiments, and conclusion first |
+| arXiv, DOI, or webpage | Recover metadata and primary paper text or abstract before summarizing |
+| Screenshot | Treat as partial evidence and avoid whole-paper claims |
+| Title only | Recover abstract-level context if possible; otherwise produce a scoped triage note |
 
-## 📥 Supported Inputs
+## Classification Logic
 
-PaperLocus is designed to work with:
+PaperLocus follows narrative logic instead of venue heuristics.
 
-- PDF
-- local files
-- arXiv links
-- DOI links
-- webpages
-- screenshots
-- title-only requests
+Prefer the method-paper branch when the abstract centers on a new model,
+algorithm, benchmark, or training recipe, and the evidence is mainly baseline
+comparison, ablation, scaling, or benchmark metrics.
 
-Input handling is intentionally different by source:
+Prefer the evidence-chain science branch when the abstract centers on a
+scientific finding, mechanism, or empirical claim about the world, and the paper
+is organized around observations or experiments supporting a central conclusion.
 
-|  | Input | Behavior |
-| --- | --- | --- |
-| 📄 | PDF or local file | Extract title, abstract, section headers, introduction, method, experiments, and conclusion first |
-| 🔗 | arXiv, DOI, or webpage | Recover metadata and primary paper text or abstract before summarizing |
-| 🖼️ | Screenshot | Treat as partial evidence and avoid whole-paper claims |
-| 🏷️ | Title only | Recover abstract-level context first, then downgrade to triage if full text is unavailable |
+If the venue suggests one branch but the narrative suggests another, PaperLocus
+follows the narrative and explicitly notes the conflict.
 
-## 🧩 Classification Logic
-
-PaperLocus uses narrative logic instead of venue heuristics.
-
-### Method-paper signals
-
-- the abstract is about a new model, algorithm, benchmark, or training recipe
-- the structure looks like `introduction -> related work -> method -> experiments`
-- the main evidence is benchmark comparison, ablation, or scaling
-- the contribution is framed as `we propose`
-
-### Science evidence-chain signals
-
-- the abstract is about a scientific finding, mechanism, or claim about the world
-- the structure is driven by findings and supporting evidence
-- the paper is organized around a scientific question or competing explanations
-- the contribution is framed as `we find`, `we reveal`, or `we show that`
-
-### Mixed-case rule
-
-If the venue suggests one branch but the narrative suggests another, PaperLocus follows the narrative and explicitly notes the conflict.
-
-## ✅ Validation Set
-
-The current version has been stress-tested on three groups:
-
-|  | Group | Examples | Expected behavior |
-| --- | --- | --- | --- |
-| 🧪 | Science venue, method-led | `scBERT`, `scGPT`, `Geneformer`, `scLong` | Treat as method-led papers |
-| 🔭 | Classical evidence-chain papers | `A kilonova as the electromagnetic counterpart to a gravitational-wave source`, `A formal test of the theory of universal common ancestry` | Treat as science evidence-chain papers |
-| 🤖 | arXiv and embodied-AI papers | `DiT`, `Unified World Models`, `Motus`, `LDA-1B`, `DINOv3` | Treat as method papers and emphasize literature positioning |
-
-## ⚙️ Installation
-
-Copy the skill folder into your Codex skills directory:
-
-```bash
-mkdir -p ~/.codex/skills
-cp -r paperlocus ~/.codex/skills/
-```
-
-On Windows PowerShell:
-
-```powershell
-New-Item -ItemType Directory -Force $HOME\.codex\skills | Out-Null
-Copy-Item -Recurse .\paperlocus $HOME\.codex\skills\
-```
-
-## 🔧 Optional Runtime Dependencies
-
-The skill itself is Markdown-only, but it works best with:
-
-- PDF reading support through `pypdf` or `pdfplumber`
-- a PDF-focused helper skill for page-level inspection
-- web access for DOI, arXiv, and webpage recovery
-
-## 💬 Example Prompts
-
-```text
-Use $paperlocus to read this PDF and produce a structured Chinese reading note.
-```
-
-```text
-Use $paperlocus to decide whether this Nature paper should be treated as a method paper or as an evidence-chain paper.
-```
-
-```text
-Use $paperlocus to explain this paper in relation to the core prior works criticized in the introduction.
-```
-
-More prompt examples are available in [examples/sample-prompts.md](examples/sample-prompts.md).
-
-## 📝 Output Style
+## Output Style
 
 The default output is a compact whole-paper note with sections such as:
 
@@ -220,9 +143,21 @@ The default output is a compact whole-paper note with sections such as:
 - limitations, counterexamples, and checks
 - sections worth close reading
 
-A compact sample output is available in [examples/sample-output.md](examples/sample-output.md).
+See [examples/sample-output.md](examples/sample-output.md) for a smoke-test
+output and [examples/sample-prompts.md](examples/sample-prompts.md) for more
+prompt patterns.
 
-## 🗂️ Repository Layout
+## Practical Notes
+
+- The skill itself is Markdown-only, but PDF reading works best when your Codex
+  environment has `pypdf` or `pdfplumber` available.
+- On Windows, prefer `codex.cmd` when PowerShell blocks npm `.ps1` wrappers.
+- Some Windows Conda setups print noisy activation errors during shell calls.
+  If the Markdown output file is valid UTF-8, those warnings may be terminal
+  noise rather than a failed PaperLocus run.
+- Start small, verify the skill is visible, then move to deep PDF reading.
+
+## Repository Layout
 
 ```text
 paperlocus/
@@ -238,12 +173,12 @@ paperlocus/
       paper_type_examples.md
 ```
 
-## 🚀 Release Copy
+## Release Copy
 
 - Repository description: `Reference-aware paper reading for Codex that classifies research papers by narrative logic, positions them in the literature, and turns them into reusable Markdown notes.`
 - Tagline: `Locate every paper in the literature, not just in a summary.`
 - First release: `v0.1.0 - Initial public release`
 
-## 📄 License
+## License
 
 Released under the [MIT License](./LICENSE).
