@@ -1,0 +1,11 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+
+# Local notes and temp files
+tmp/
+*.log

@@ -1,0 +1,4 @@
+interface:
+  display_name: "PaperLocus"
+  short_description: "Read papers through literature position and insight"
+  default_prompt: "Use $paperlocus to explain what this whole paper is doing and where it sits in the literature."
